@@ -1,10 +1,12 @@
+'use client';
 import ImagePicker from '@/components/meals/image-picker';
 import classes from './page.module.css';
-import { shareMeal } from '@/lib/actions';
+import { shareMeal } from '@/lib/actions.js';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
+import { useFormState } from 'react-dom'; // in new version react we need use import { useActionState } from 'react'; but its only when  Thus you can get support for useActionState in Next.js by running npx create-next-app@14.3.0-canary.46, or any greater version.
 
 export default function ShareMealPage() {
-
+const [state, formAction] = useFormState(shareMeal, {message: null})
   return (
     <>
       <header className={classes.header}>
@@ -14,7 +16,7 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={classes.main}>
-        <form className={classes.form} action={shareMeal}>
+        <form className={classes.form} action={formAction}>
           <div className={classes.row}>
             <p>
               <label htmlFor="name">Your name</label>
@@ -43,6 +45,7 @@ export default function ShareMealPage() {
             ></textarea>
           </p>
           <ImagePicker label='Your image' name='image'/>
+          {state.message && <p>{state.message}</p>}
           <p className={classes.actions}>
             <MealsFormSubmit/>
           </p>
