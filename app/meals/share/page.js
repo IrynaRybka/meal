@@ -1,23 +1,23 @@
 'use client';
 import ImagePicker from '@/components/meals/image-picker';
-import classes from './page.module.css';
+import styles from './page.module.css';
 import { shareMeal } from '@/lib/actions.js';
 import MealsFormSubmit from '@/components/meals/meals-form-submit';
-import { useFormState } from 'react-dom'; // in new version react we need use import { useActionState } from 'react'; but its only when  Thus you can get support for useActionState in Next.js by running npx create-next-app@14.3.0-canary.46, or any greater version.
+import { useFormState } from 'react-dom'; // in new version react we need use import { useActionState } from 'react'; but its only when added support for React 19 features, specifically useActionState in PR 65058. Thus you can get support for useActionState in Next.js by running npx create-next-app@14.3.0-canary.46, or any greater version.
 
 export default function ShareMealPage() {
 const [state, formAction] = useFormState(shareMeal, {message: null})
   return (
     <>
-      <header className={classes.header}>
+      <header className={styles.header}>
         <h1>
-          Share your <span className={classes.highlight}>favorite meal</span>
+          Share your <span className={styles.highlight}>favorite meal</span>
         </h1>
         <p>Or any other meal you feel needs sharing!</p>
       </header>
-      <main className={classes.main}>
-        <form className={classes.form} action={formAction}>
-          <div className={classes.row}>
+      <main className={styles.main}>
+        <form className={styles.form} action={formAction}>
+          <div className={styles.row}>
             <p>
               <label htmlFor="name">Your name</label>
               <input type="text" id="name" name="name" required />
@@ -46,7 +46,7 @@ const [state, formAction] = useFormState(shareMeal, {message: null})
           </p>
           <ImagePicker label='Your image' name='image'/>
           {state.message && <p>{state.message}</p>}
-          <p className={classes.actions}>
+          <p className={styles.actions}>
             <MealsFormSubmit/>
           </p>
         </form>

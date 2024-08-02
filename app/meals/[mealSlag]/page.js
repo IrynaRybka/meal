@@ -3,10 +3,23 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+// export async function generateMetadata({ params }) {
+//   const meal = getMeal(params.mealSlag);
+
+// if(!meal) {
+//   notFound();
+// }
+
+//   return {
+//     title: meal.title,
+//     description: meal.summary,
+//   }
+// }
+
 export default function MealsDetailsPage({ params }) {
   const meal = getMeal(params.mealSlag);
-  if(!meal) {
-    notFound()
+  if (!meal) {
+    notFound();
   }
   meal.instructions = meal.instructions.replace(/\n/g, '<br>');
 
@@ -14,7 +27,11 @@ export default function MealsDetailsPage({ params }) {
     <>
       <header className={styles.header}>
         <div className={styles.image}>
-          <Image src={meal.image} alt={meal.title} fill />
+          <Image
+            src={`https://iryna-nextjs-meal-demo-users-image.s3.amazonaws.com/${meal.image}`}
+            alt={meal.title}
+            fill
+          />
         </div>
         <div className={styles.headerText}>
           <h1>{meal.title}</h1>
@@ -26,13 +43,12 @@ export default function MealsDetailsPage({ params }) {
         </div>
       </header>
       <main>
-      <p
+        <p
           className={styles.instructions}
           dangerouslySetInnerHTML={{
             __html: meal.instructions,
           }}
         ></p>
-
       </main>
     </>
   );
