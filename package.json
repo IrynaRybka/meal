@@ -2,7 +2,6 @@
   "name": "meal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://IrynaRybka.github.io/meal/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
